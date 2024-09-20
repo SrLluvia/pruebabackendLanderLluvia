@@ -46,21 +46,21 @@ public class CountryController {
 			for(JsonNode countryNode: countryResponseParsed) {
 				//Get field name.official as String
 				String officialName = countryNode.path("name").path("official").asText();
-				System.out.println("Official name: " + officialName);
 				//Get field population as int
 				int population = countryNode.path("population").asInt();
-				System.out.println("Population: " + population);
 				
 				//Create new Country and save it
 				Country country = new Country(officialName, population);
 				countryRepository.save(country);
-				System.out.println("Saved");
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
+	/*
+	 * Retrieves all info from Country table
+	 */
 	@GetMapping("/api/v1/data/country")
 	public List<Country> getAllCountrysInfo(){
 		return countryRepository.findAll();
